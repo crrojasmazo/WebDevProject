@@ -6,11 +6,13 @@ function Header() {
     return (
       <AppBar position="static">
         <Toolbar>
-          <Link to="/">
+         
           <Typography variant="h6" style={{ flexGrow: 1 }}>
+          <Link to="/">
             My Homepage
+            </Link>
           </Typography>
-          </Link>
+          
           <Link to="/login">
           <Button color="inherit">Log In</Button>
           </Link>
