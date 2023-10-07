@@ -8,14 +8,19 @@ function Header() {
   return (
     <AppBar position="static">
       <Toolbar>
-        <Typography variant="h6" style={{ flexGrow: 1 }}>
-          <Link to="/">
+        <Link to="/">
+          <Typography variant="h6">
+
             My Homepage
-          </Link>
-        </Typography>
+
+          </Typography>
+        </Link>
+        <Link to="/register">
+          <Button variant="contained" color="inherit">Sign Up</Button>
+        </Link>
 
         <Link to="/login">
-          <Button color="inherit">Log In</Button>
+          <Button variant="contained" color="inherit">Log In</Button>
         </Link>
       </Toolbar>
     </AppBar>
