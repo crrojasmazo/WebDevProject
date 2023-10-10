@@ -1,12 +1,12 @@
 import React from 'react';
 import Header from '../Layouts/Header';
-import Convert from '../Components/Convert';
+import MainIndex from '../Layouts/MainIndex';
 
 function Homepage() {
   return (
     <div>
       <Header />
-      <Convert />
+      <MainIndex />
     </div>
   );
 }

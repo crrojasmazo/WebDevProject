@@ -1,6 +1,6 @@
 import { useState, React } from 'react';
 import {
-  Container, Typography, TextField, Button,
+  Container, Typography, TextField, Button, Modal, Box,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 import Header from '../Layouts/Header';
@@ -23,6 +23,26 @@ function LoginPage() {
     e.preventDefault();
     // Add authentication logic here
     console.log('Form submitted with data:', formData);
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
+    const msg = 'Login successful / Login unsuccessful';
+
+    handleOpen();
+
+    return (
+      <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
+        <Box>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            Text in a modal
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            {msg}
+          </Typography>
+        </Box>
+      </Modal>
+    );
   };
 
   return (
@@ -58,12 +78,13 @@ function LoginPage() {
             color="primary"
             fullWidth
             size="large"
+            id="login"
           >
             Login
           </Button>
         </form>
         <Typography variant="body2" align="center" marginTop={2}>
-          {'dont&apos;t have an account yet? Sign Up  '}
+          {"Don't have an account yet? Sign Up  "}
           {' '}
           <Link to="/register">
             Here
