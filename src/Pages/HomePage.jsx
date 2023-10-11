@@ -4,10 +4,10 @@ import MainIndex from '../Layouts/MainIndex';
 
 function Homepage() {
   return (
-    <div>
+    <>
       <Header />
       <MainIndex />
-    </div>
+    </>
   );
 }
 

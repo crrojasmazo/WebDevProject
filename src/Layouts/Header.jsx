@@ -1,28 +1,25 @@
 import React from 'react';
 import {
-  AppBar, Toolbar, Typography, Button,
+  AppBar, Toolbar, Button, Container,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
+import currencyapplogo from '../Assets/Images/currencyapplogo.png';
 
 function Header() {
   return (
     <AppBar position="static">
-      <Toolbar>
-        <Link to="/">
-          <Typography variant="h6">
+      <Container maxWidth="xl">
+        <Toolbar disableGutters>
+          <Link to="/">
+            <img src={currencyapplogo} width={75} height={75} alt="logo" />
+          </Link>
 
-            My Homepage
+          <Link to="/login">
+            <Button variant="contained" color="inherit">Log In</Button>
+          </Link>
 
-          </Typography>
-        </Link>
-        <Link to="/register">
-          <Button variant="contained" color="inherit">Sign Up</Button>
-        </Link>
-
-        <Link to="/login">
-          <Button variant="contained" color="inherit">Log In</Button>
-        </Link>
-      </Toolbar>
+        </Toolbar>
+      </Container>
     </AppBar>
   );
 }
