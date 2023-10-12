@@ -10,9 +10,9 @@ import grafica2 from '../Assets/Images/prueba21.png';
 
 function MainIndex() {
   return (
-    <Container maxWidth="xl">
-      <Grid container style={{ 'background-color': '#1c1d1f' }}>
-        <Grid container xs={11} spacing={0}>
+    <Container maxWidth="xl" id="main_index" className="bg-dark text-light">
+      <Grid container>
+        <Grid item xs={11}>
           <Grid container>
             <Grid item xs={4}>
               <img style={{ height: '90%' }} src={imagen1} alt="primera imagen" />

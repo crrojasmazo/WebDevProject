@@ -45,7 +45,7 @@ function Convert() {
               type="number"
               onChange={handleChange}
               InputLabelProps={{
-                startAdornment: (
+                startadornment: (
                   <InputAdornment position="start">
                     <AccountCircle />
                   </InputAdornment>

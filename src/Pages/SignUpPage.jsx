@@ -29,7 +29,7 @@ function SignUpPage() {
   return (
     <>
       <Header />
-      <Container maxWidth="xs">
+      <Container id="signup_container" maxWidth="xl" className="bg-dark text-light vh-100">
         <form onSubmit={handleSubmit}>
           <Typography variant="h4" align="center" gutterBottom>
             Sign Up

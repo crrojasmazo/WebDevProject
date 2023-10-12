@@ -1,9 +1,17 @@
 import { useState, React } from 'react';
 import {
-  Container, Typography, TextField, Button, Modal, Box,
+  Container, Typography, TextField, Button,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 import Header from '../Layouts/Header';
+
+const users = {
+  alejandro: 'mazamorra',
+  luis: '321321',
+  rojas: 'aaa',
+};
+
+let modal = null;
 
 function LoginPage() {
   const [formData, setFormData] = useState({
@@ -23,32 +31,26 @@ function LoginPage() {
     e.preventDefault();
     // Add authentication logic here
     console.log('Form submitted with data:', formData);
-    const [open, setOpen] = useState(false);
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
 
-    const msg = 'Login successful / Login unsuccessful';
+    modal = document.getElementById('modalLogin');
+    modal.style.display = 'contents';
 
-    handleOpen();
+    document.querySelectorAll('.cerrar_modal').forEach((boton) => {
+      boton.addEventListener('click', () => {
+        console.log('¡Botón presionado!');
+        modal.style.display = 'hidden';
+        modal.innerHTML = 'hidden';
+      });
+    });
 
-    return (
-      <Modal open={open} onClose={handleClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
-        <Box>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            {msg}
-          </Typography>
-        </Box>
-      </Modal>
-    );
+    // Rojas perdon...
+    if (users[formData.username] != null) { if (users[formData.username] === formData.password) { console.log('Bienvenido ome'); } else { console.log('Clave incorrecta'); } } else { console.log('Usuario no existe'); }
   };
 
   return (
     <>
       <Header />
-      <Container maxWidth="xl">
+      <Container id="login_container" maxWidth="xl" className="bg-dark text-light vh-100">
         <Container maxWidth="xs">
           <form onSubmit={handleSubmit}>
             <Typography variant="h4" align="center" gutterBottom>
@@ -62,6 +64,7 @@ function LoginPage() {
               name="username"
               value={formData.username}
               onChange={handleInputChange}
+              className="text-bg-secondary"
             />
             <TextField
               label="Password"
@@ -72,6 +75,7 @@ function LoginPage() {
               type="password"
               value={formData.password}
               onChange={handleInputChange}
+              className="text-bg-secondary"
             />
             <Button
               type="submit"
@@ -80,9 +84,28 @@ function LoginPage() {
               fullWidth
               size="large"
               id="login"
+              data-bs-toggle="modal"
+              data-bs-target="#modalLogin"
             >
               Login
             </Button>
+
+            <div className="modal fade" id="modalLogin" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div className="modal-dialog">
+                <div className="modal-content">
+                  <div className="modal-header">
+                    <h1 className="modal-title fs-5" id="exampleModalLabel">Login</h1>
+                    <button type="button" className="btn-close cerrar_modal" data-bs-dismiss="modal" aria-label="Close" />
+                  </div>
+                  <div className="modal-body" />
+                  <div className="modal-footer">
+                    <button type="button" className="btn btn-secondary cerrar_modal" data-bs-dismiss="modal">Close</button>
+                    <button type="button" className="btn btn-primary cerrar_modal">Save changes</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </form>
           <Typography variant="body2" align="center" marginTop={2}>
             {"Don't have an account yet? Sign Up  "}
