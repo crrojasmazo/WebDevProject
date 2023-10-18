@@ -1,10 +1,16 @@
 import { useState, React } from 'react';
 import {
-  Container, Typography, TextField, Button,
+  Container, Typography, TextField, Button, MenuItem, InputLabel,
+  FormControl, Select, Box,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 import Header from '../Layouts/Header';
 
+const age = null;
+const setAge = null;
+const handleChange = (event) => {
+  setAge(event.target.value);
+};
 const users = {
   alejandro: 'mazamorra',
   luis: '321321',
@@ -13,7 +19,7 @@ const users = {
 
 let modal = null;
 
-function LoginPage() {
+function pqr() {
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -50,30 +56,36 @@ function LoginPage() {
   return (
     <>
       <Header />
-      <Container id="login_container" maxWidth="xl" className="bg-dark text-light vh-100">
+      <Container id="pqr_container" maxWidth="xl" className="bg-dark text-light vh-100">
         <Container maxWidth="xs">
           <form onSubmit={handleSubmit}>
             <Typography variant="h4" align="center" gutterBottom>
-              Login
+              Support
             </Typography>
+            <Box>
+              <FormControl className="w-75">
+                <InputLabel id="demo-simple-select-label">Select Your Inquiry</InputLabel>
+                <Select
+                  labelId="demo-simple-select-label"
+                  id="demo-simple-select"
+                  value={age}
+                  label="Age"
+                  onChange={handleChange}
+                >
+                  <MenuItem value={10}>Complaint</MenuItem>
+                  <MenuItem value={20}>Request</MenuItem>
+                  <MenuItem value={30}>Suggestion</MenuItem>
+                </Select>
+              </FormControl>
+            </Box>
             <TextField
-              label="Username"
+              label="Details"
               variant="outlined"
               fullWidth
+              size="medium"
               margin="normal"
-              name="username"
-              value={formData.username}
-              onChange={handleInputChange}
-              className="text-bg-secondary"
-            />
-            <TextField
-              label="Password"
-              variant="outlined"
-              fullWidth
-              margin="normal"
-              name="password"
-              type="password"
-              value={formData.password}
+              name="details"
+              value={formData.details}
               onChange={handleInputChange}
               className="text-bg-secondary"
             />
@@ -83,11 +95,11 @@ function LoginPage() {
               color="primary"
               fullWidth
               size="large"
-              id="login"
+              id="send"
               data-bs-toggle="modal"
               data-bs-target="#modalLogin"
             >
-              Login
+              Send
             </Button>
 
             <div className="modal fade" id="modalLogin" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -120,4 +132,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default pqr;
