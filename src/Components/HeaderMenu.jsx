@@ -1,17 +1,13 @@
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import Divider from '@mui/material/Divider';
-import Settings from '@mui/icons-material/Settings';
-import Logout from '@mui/icons-material/Logout';
+import React, { useState } from 'react';
+import {
+  Modal, Avatar, Menu, MenuItem, ListItemIcon, Divider, Box, Typography,
+} from '@mui/material';
+import { Settings, Logout } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 
 const HeaderMenu = ({
-  open, handleClose, anchorEl, logout,
+  open, handleClose, anchorEl, handleOpenModal,
 }) => (
-
   <Menu
     anchorEl={anchorEl}
     id="account-menu"
@@ -47,7 +43,7 @@ const HeaderMenu = ({
     transformOrigin={{ horizontal: 'right', vertical: 'top' }}
     anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
   >
-    <Link to="/" style={{ color: 'black', textDecoration: 'none' }}>
+    <Link to="/profile" style={{ color: 'black', textDecoration: 'none' }}>
       <MenuItem>
         <Avatar />
         {' '}
@@ -63,14 +59,13 @@ const HeaderMenu = ({
         FAQs
       </MenuItem>
     </Link>
-    <Link to="/" style={{ color: 'black', textDecoration: 'none' }}>
-      <MenuItem onClick={logout}>
-        <ListItemIcon>
-          <Logout fontSize="small" />
-        </ListItemIcon>
-        Logout
-      </MenuItem>
-    </Link>
+    <MenuItem onClick={handleOpenModal}>
+      <ListItemIcon>
+        <Logout fontSize="small" />
+      </ListItemIcon>
+      Logout
+
+    </MenuItem>
   </Menu>
 );
 
