@@ -1,18 +1,10 @@
 import React from 'react';
 import {
-  AppBar, Box, Toolbar, Button, MenuItem, Container, InputLabel, FormControl, Select,
+  AppBar, Box, Toolbar, Button, Container,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 import currencyapplogo from '../Assets/Images/currencyapplogo.png';
-/*
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
-import Select from '@mui/material/Select';
-*/
-/* const [age, setAge] = React.usestate(''); */
+
 const age = null;
 const setAge = null;
 const handleChange = (event) => {
@@ -21,36 +13,30 @@ const handleChange = (event) => {
 
 function Header() {
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <Link to="/">
-            <img src={currencyapplogo} width={75} height={75} alt="logo" />
-          </Link>
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static">
+        <Container maxWidth="xl">
+          <Toolbar disableGutters>
+            <Box padding={2}>
+              <Link to="/">
+                <img src={currencyapplogo} width={75} height={75} alt="logo" />
+              </Link>
+            </Box>
 
-          <Link to="/login">
-            <Button variant="contained" color="inherit">Log In</Button>
-          </Link>
+            <Box sx={{ flexGrow: 1 }} />
+            <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
 
-        </Toolbar>
-        <Box>
-          <FormControl className="w-25">
-            <InputLabel id="demo-simple-select-label">Guest</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              id="demo-simple-select"
-              value={age}
-              label="Age"
-              onChange={handleChange}
-            >
-              <MenuItem value={10}>User</MenuItem>
-              <MenuItem value={20}>Support</MenuItem>
-              <MenuItem value={30}>Settings</MenuItem>
-            </Select>
-          </FormControl>
-        </Box>
-      </Container>
-    </AppBar>
+              <Link to="/login">
+                <Button variant="contained" color="inherit">Log In</Button>
+              </Link>
+
+            </Box>
+
+          </Toolbar>
+
+        </Container>
+      </AppBar>
+    </Box>
   );
 }
 

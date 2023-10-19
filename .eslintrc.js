@@ -24,5 +24,8 @@ module.exports = {
   rules: {
     'linebreak-style': 0,
     'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
+    'no-unused-vars': 'warn',
+    'import/prefer-default-export': 'off',
+    'max-len': 'off',
   },
 };

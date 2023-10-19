@@ -25,14 +25,14 @@ function Convert() {
   }
 
   return (
-    <Card sx={{ maxWidth: 125 }}>
+    <Card sx={{ width: 1000 }}>
       <CardContent>
         <Grid
           container
           spacing={0.5}
-          direction="column"
-          alignItems="right"
-          justifyContent="right"
+          direction="row"
+          alignItems="center"
+          justifyContent="center"
         >
           <Grid item xs={4}>
 

@@ -56,7 +56,7 @@ function pqr() {
   return (
     <>
       <Header />
-      <Container id="pqr_container" maxWidth="xl" className="bg-dark text-light vh-100">
+      <Container id="pqr_container" maxWidth="xl" className="bg-light text-dark vh-100">
         <Container maxWidth="xs">
           <form onSubmit={handleSubmit}>
             <Typography variant="h4" align="center" gutterBottom>
