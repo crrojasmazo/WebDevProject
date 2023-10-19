@@ -27,5 +27,8 @@ module.exports = {
     'no-unused-vars': 'warn',
     'import/prefer-default-export': 'off',
     'max-len': 'off',
+    'react/function-component-definition': 'off',
+    'react/prop-types': 'off',
+    'react/jsx-no-constructed-context-values': 'off',
   },
 };

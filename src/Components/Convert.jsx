@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import CachedIcon from '@mui/icons-material/Cached';
 import { AccountCircle } from '@mui/icons-material';
 
-function Convert() {
+const Convert = () => {
   const [amount, setAmount] = useState(0);
   const [from, setFrom] = useState('');
   const [to, setTo] = useState('');
@@ -95,6 +95,6 @@ function Convert() {
       </CardActions>
     </Card>
   );
-}
+};
 
 export default Convert;

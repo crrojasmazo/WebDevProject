@@ -1,17 +1,34 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {
-  AppBar, Box, Toolbar, Button, Container,
+  AppBar, Box, Toolbar, Button, Container, Avatar, Tooltip, IconButton,
 } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import currencyapplogo from '../Assets/Images/currencyapplogo.png';
+import dogfire from '../Assets/Images/dogfire.jpg';
+import { UserContext } from '../Context/Context';
+import HeaderMenu from '../Components/HeaderMenu';
 
-const age = null;
-const setAge = null;
-const handleChange = (event) => {
-  setAge(event.target.value);
-};
+const Header = () => {
+  const { user, setUser } = useContext(UserContext);
 
-function Header() {
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const logout = () => {
+    setUser({
+      ...user,
+      isAuth: false,
+    });
+  };
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
@@ -25,12 +42,26 @@ function Header() {
 
             <Box sx={{ flexGrow: 1 }} />
             <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
+              {user.isAuth
+                ? (
 
-              <Link to="/login">
-                <Button variant="contained" color="inherit">Log In</Button>
-              </Link>
-
+                  <Tooltip title="Account settings">
+                    <IconButton
+                      onClick={handleClick}
+                      size="small"
+                      sx={{ ml: 2 }}
+                    >
+                      <Avatar alt="User profile picture" src={dogfire} sx={{ width: 56, height: 56 }} />
+                    </IconButton>
+                  </Tooltip>
+                ) : (
+                  <Link to="/login">
+                    <Button variant="contained" color="inherit">Log In</Button>
+                  </Link>
+                )}
             </Box>
+
+            <HeaderMenu open={open} handleClose={handleClose} anchorEl={anchorEl} logout={logout} />
 
           </Toolbar>
 
@@ -38,6 +69,6 @@ function Header() {
       </AppBar>
     </Box>
   );
-}
+};
 
 export default Header;
