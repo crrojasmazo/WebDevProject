@@ -30,6 +30,7 @@ const ProfilePage = () => (
           <Typography variant="body1">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sit amet varius velit. Vivamus sed posuere
             libero, non hendrerit felis.
+            If you read it backwards a member of the support team will help you around 3:00 am
           </Typography>
 
           <Typography variant="h5" style={{ marginTop: '20px' }}>
@@ -39,6 +40,21 @@ const ProfilePage = () => (
             - Web Development
             - React and Material-UI
             - Suffer with web Development
+          </Typography>
+
+          <Typography variant="h5" style={{ marginTop: '20px' }}>
+            Birth Date
+          </Typography>
+          <Typography variant="body1">
+            01/09/1939
+          </Typography>
+
+          <Typography variant="h5" style={{ marginTop: '20px' }}>
+            Contact Information
+          </Typography>
+          <Typography variant="body1">
+            For trading and advise you can contact me at:
+            totallynotascam@trustworthybank.com
           </Typography>
 
           <Button variant="contained" color="primary" style={{ marginTop: '20px' }}>
