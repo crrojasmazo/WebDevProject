@@ -41,47 +41,48 @@ const SignUpPage = () => {
   return (
     <Container id="signup_container" maxWidth="xl" className="bg-light text-dark vh-100">
       <Container maxWidth="xs">
+        <div style={{ paddingTop: 50 }}>
+          <form onSubmit={handleSubmit}>
+            <Typography variant="h4" align="center" gutterBottom>
+              Sign Up
+            </Typography>
+            <TextField
+              label="Username"
+              variant="outlined"
+              fullWidth
+              margin="normal"
+              name="username"
+              value={formData.username}
+              onChange={handleInputChange}
+            />
+            <TextField
+              label="Password"
+              variant="outlined"
+              fullWidth
+              margin="normal"
+              name="password"
+              type="password"
+              value={formData.password}
+              onChange={handleInputChange}
+            />
+            <Typography variant="body1" color="error" align="center">{formData.errorMessage}</Typography>
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              fullWidth
+              size="large"
+            >
+              Sign Up
+            </Button>
+          </form>
 
-        <form onSubmit={handleSubmit}>
-          <Typography variant="h4" align="center" gutterBottom>
-            Sign Up
+          <Typography variant="body2" align="center" marginTop={2}>
+            Already have an account?
+            {' '}
+            <Link to="/login">Login</Link>
           </Typography>
-          <TextField
-            label="Username"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            name="username"
-            value={formData.username}
-            onChange={handleInputChange}
-          />
-          <TextField
-            label="Password"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            name="password"
-            type="password"
-            value={formData.password}
-            onChange={handleInputChange}
-          />
-          <Typography variant="body1" color="error" align="center">{formData.errorMessage}</Typography>
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            fullWidth
-            size="large"
-          >
-            Sign Up
-          </Button>
-        </form>
-
-        <Typography variant="body2" align="center" marginTop={2}>
-          Already have an account?
-          {' '}
-          <Link to="/login">Login</Link>
-        </Typography>
+        </div>
       </Container>
     </Container>
   );

@@ -93,7 +93,7 @@ const Header = () => {
             onClose={handleCloseModal}
           >
             <Box sx={style}>
-              <Typography id="modal-modal-title" variant="h6" component="h2">
+              <Typography id="modal-modal-title" variant="h6" component="h2" textAlign="center">
                 Do you want to leave?
               </Typography>
               <Box display="flex" justifyContent="center">

@@ -61,52 +61,54 @@ const LoginPage = () => {
   return (
     <Container id="login_container" maxWidth="xl" className="bg-light text-dark vh-100">
       <Container maxWidth="xs">
-        <form onSubmit={handleSubmit}>
-          <Typography variant="h4" align="center" gutterBottom>
-            Login
+        <div style={{ paddingTop: 50 }}>
+          <form onSubmit={handleSubmit}>
+            <Typography variant="h4" align="center" gutterBottom>
+              Login
+            </Typography>
+            <TextField
+              label="Username"
+              variant="outlined"
+              fullWidth
+              margin="normal"
+              name="username"
+              value={formData.username}
+              onChange={handleInputChange}
+            />
+            <TextField
+              label="Password"
+              variant="outlined"
+              fullWidth
+              margin="normal"
+              name="password"
+              type="password"
+              value={formData.password}
+              onChange={handleInputChange}
+            />
+
+            <Typography variant="body1" color="error" align="center">{formData.errorMessage}</Typography>
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              fullWidth
+              size="large"
+              id="login"
+              data-bs-toggle="modal"
+              data-bs-target="#modalLogin"
+            >
+              Login
+            </Button>
+
+          </form>
+          <Typography variant="body2" align="center" marginTop={2}>
+            {"Don't have an account yet? Sign Up  "}
+            {' '}
+            <Link to="/register">
+              Here
+            </Link>
           </Typography>
-          <TextField
-            label="Username"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            name="username"
-            value={formData.username}
-            onChange={handleInputChange}
-          />
-          <TextField
-            label="Password"
-            variant="outlined"
-            fullWidth
-            margin="normal"
-            name="password"
-            type="password"
-            value={formData.password}
-            onChange={handleInputChange}
-          />
-
-          <Typography variant="body1" color="error" align="center">{formData.errorMessage}</Typography>
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
-            fullWidth
-            size="large"
-            id="login"
-            data-bs-toggle="modal"
-            data-bs-target="#modalLogin"
-          >
-            Login
-          </Button>
-
-        </form>
-        <Typography variant="body2" align="center" marginTop={2}>
-          {"Don't have an account yet? Sign Up  "}
-          {' '}
-          <Link to="/register">
-            Here
-          </Link>
-        </Typography>
+        </div>
       </Container>
     </Container>
   );

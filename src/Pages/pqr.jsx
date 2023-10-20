@@ -1,27 +1,18 @@
-import { useState, React } from 'react';
+import { useState, React, Fragment } from 'react';
 import {
   Container, Typography, TextField, Button, MenuItem, InputLabel,
-  FormControl, Select, Box,
+  FormControl, Select, Box, Accordion, AccordionSummary, AccordionDetails,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
 
-const age = null;
-const setAge = null;
-const handleChange = (event) => {
-  setAge(event.target.value);
-};
-const users = {
-  alejandro: 'mazamorra',
-  luis: '321321',
-  rojas: 'aaa',
-};
-
-let modal = null;
+import { ExpandMore } from '@mui/icons-material';
+import { faqs } from './PageHelper';
 
 const pqr = () => {
   const [formData, setFormData] = useState({
-    username: '',
-    password: '',
+    name: '',
+    email: '',
+    inquiry: '',
   });
 
   const handleInputChange = (e) => {
@@ -36,93 +27,81 @@ const pqr = () => {
     e.preventDefault();
     // Add authentication logic here
     console.log('Form submitted with data:', formData);
-
-    modal = document.getElementById('modalLogin');
-    modal.style.display = 'contents';
-
-    document.querySelectorAll('.cerrar_modal').forEach((boton) => {
-      boton.addEventListener('click', () => {
-        console.log('¡Botón presionado!');
-        modal.style.display = 'hidden';
-        modal.innerHTML = '';
-      });
-    });
-
-    // Rojas perdon...
-    if (users[formData.username] != null) { if (users[formData.username] === formData.password) { console.log('Bienvenido ome'); } else { console.log('Clave incorrecta'); } } else { console.log('Usuario no existe'); }
   };
 
   return (
     <Container id="pqr_container" maxWidth="xl" className="bg-light text-dark vh-100">
-      <Container maxWidth="xs">
+      <Container maxWidth="sm">
+        <div style={{ paddingTop: 50 }}>
+          {faqs.map((faq, index) => (
+          // eslint-disable-next-line react/no-array-index-key
+            <Accordion key={index}>
+              <AccordionSummary expandIcon={<ExpandMore />}>
+                <Typography variant="h6">{faq.question}</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Typography>{faq.answer}</Typography>
+              </AccordionDetails>
+            </Accordion>
+          ))}
+        </div>
+
+        <Typography variant="h5" align="center" gutterBottom marginTop={5}>
+          Inquiry Form
+        </Typography>
         <form onSubmit={handleSubmit}>
-          <Typography variant="h4" align="center" gutterBottom>
-            Support
-          </Typography>
-          <Box>
-            <FormControl className="w-75">
-              <InputLabel id="demo-simple-select-label">Select Your Inquiry</InputLabel>
-              <Select
-                labelId="demo-simple-select-label"
-                id="demo-simple-select"
-                value={age}
-                label="Age"
-                onChange={handleChange}
-              >
-                <MenuItem value={10}>Complaint</MenuItem>
-                <MenuItem value={20}>Request</MenuItem>
-                <MenuItem value={30}>Suggestion</MenuItem>
-              </Select>
-            </FormControl>
-          </Box>
           <TextField
-            label="Details"
+            label="Name"
+            name="name"
             variant="outlined"
             fullWidth
-            size="medium"
-            margin="normal"
-            name="details"
-            value={formData.details}
+            value={formData.name}
             onChange={handleInputChange}
-            className="text-bg-secondary"
+            required
+            margin="normal"
           />
-          <Button
-            type="submit"
-            variant="contained"
-            color="primary"
+          <TextField
+            label="Email"
+            name="email"
+            type="email"
+            variant="outlined"
             fullWidth
-            size="large"
-            id="send"
-            data-bs-toggle="modal"
-            data-bs-target="#modalLogin"
-          >
-            Send
-          </Button>
-
-          <div className="modal fade" id="modalLogin" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div className="modal-dialog">
-              <div className="modal-content">
-                <div className="modal-header">
-                  <h1 className="modal-title fs-5" id="exampleModalLabel">Login</h1>
-                  <button type="button" className="btn-close cerrar_modal" data-bs-dismiss="modal" aria-label="Close" />
-                </div>
-                <div className="modal-body" />
-                <div className="modal-footer">
-                  <button type="button" className="btn btn-secondary cerrar_modal" data-bs-dismiss="modal">Close</button>
-                  <button type="button" className="btn btn-primary cerrar_modal">Save changes</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
+            value={formData.email}
+            onChange={handleInputChange}
+            required
+            margin="normal"
+          />
+          <FormControl fullWidth variant="outlined" margin="normal">
+            <InputLabel>Inquiry Type</InputLabel>
+            <Select
+              name="inquiryType"
+              value={formData.inquiryType}
+              onChange={handleInputChange}
+              label="Inquiry Type"
+            >
+              <MenuItem value="Complain">Complain</MenuItem>
+              <MenuItem value="Request">Request</MenuItem>
+              <MenuItem value="Suggestion">Suggestion</MenuItem>
+            </Select>
+          </FormControl>
+          <TextField
+            label="Description"
+            name="inquiry"
+            variant="outlined"
+            multiline
+            fullWidth
+            rows={4}
+            value={formData.inquiry}
+            onChange={handleInputChange}
+            required
+            margin="normal"
+          />
+          <Box mt={2}>
+            <Button type="submit" variant="contained" color="primary">
+              Submit Inquiry
+            </Button>
+          </Box>
         </form>
-        <Typography variant="body2" align="center" marginTop={2}>
-          {"Don't have an account yet? Sign Up  "}
-          {' '}
-          <Link to="/register">
-            Here
-          </Link>
-        </Typography>
       </Container>
     </Container>
 
