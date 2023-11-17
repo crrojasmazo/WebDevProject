@@ -9,7 +9,6 @@ import Layout from './Layouts/Layout';
 import { UserContext } from './Context/Context';
 import ProtectedRoute from './Components/ProtectedRoute';
 import ProfilePage from './Pages/ProfilePage';
-import { response } from 'express';
 
 const App = () => {
   const [user, setUser] = useState({

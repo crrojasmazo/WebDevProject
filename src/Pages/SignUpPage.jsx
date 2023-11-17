@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import {
   Container, Typography, TextField, Button,
 } from '@mui/material';
 import { Link } from 'react-router-dom';
+import authService from '../ApiCalls/authService';
+import { UserContext } from '../Context/Context';
 
 const SignUpPage = () => {
+  const { user, setUser } = useContext(UserContext);
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -29,7 +32,32 @@ const SignUpPage = () => {
         ...formData,
         errorMessage: 'Type username and password',
       });
+      return
     }
+    
+    const res = authService.signup({
+      email: formData.username,
+      password: formData.password
+    })
+    res.then((val) => {
+      if(val.status === 201) {
+        setUser({
+          ...user,
+          isAuth: true,
+        });
+      } else {
+        setFormData({
+          ...formData,
+          password: '',
+          errorMessage: 'An error occurred',
+        });
+      }
+    })
+    .catch( setFormData({
+      ...formData,
+      password: '',
+      errorMessage: 'An error occurred',
+    }) )
   };
 
   useEffect(() => {

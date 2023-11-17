@@ -7,6 +7,8 @@ import {
 import { Link } from 'react-router-dom';
 import { performLogIn } from './PageHelper';
 import { UserContext } from '../Context/Context';
+import authService from '../ApiCalls/authService';
+
 
 const LoginPage = () => {
   const { user, setUser } = useContext(UserContext);
@@ -28,21 +30,28 @@ const LoginPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log('a:', user);
-
     if (formData.username !== '' && formData.password !== '') {
-      const res = performLogIn(formData);
-      if (!res) {
-        setFormData({
-          ...formData,
-          errorMessage: 'Invalid Username or password',
-        });
-      } else {
-        setUser({
-          ...user,
-          isAuth: true,
-        });
-      }
+      const res = authService.signin({
+        email: formData.username,
+        password: formData.password
+      });
+      res.then((val) => {
+        if(val.status === 200) {
+          setUser({
+            ...user,
+            isAuth: true,
+          });
+        } else {
+          setFormData({
+            ...formData,
+            errorMessage: 'An error occurred',
+          });
+        }
+      }).catch(setFormData({
+        ...formData,
+        password: '',
+        errorMessage: 'An error occurred',
+      }))
     } else {
       setFormData({
         ...formData,
