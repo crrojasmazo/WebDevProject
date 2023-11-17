@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import Homepage from './Pages/HomePage';
@@ -9,6 +9,7 @@ import Layout from './Layouts/Layout';
 import { UserContext } from './Context/Context';
 import ProtectedRoute from './Components/ProtectedRoute';
 import ProfilePage from './Pages/ProfilePage';
+import { response } from 'express';
 
 const App = () => {
   const [user, setUser] = useState({
@@ -16,6 +17,18 @@ const App = () => {
     email: '',
     isAuth: false,
   });
+
+  const [backendData, setBackendData] = useState([{}])
+
+  useEffect(() => {
+    fetch("/").then(
+      response => response.json()
+    ).then(
+      data => {
+        setBackendData(data)
+      }
+    )
+  }, [])
 
   return (
     <UserContext.Provider value={{ user, setUser }}>
