@@ -1,12 +1,18 @@
 /* eslint-disable react/jsx-no-bind */
 import {
-  Card, CardContent, Grid, IconButton, TextField, CardActions, Button, InputAdornment,
+  Card, CardContent, Grid, TextField, CardActions, Button, InputAdornment, Select, MenuItem, FormControl, InputLabel
 } from '@mui/material';
-import React, { useState } from 'react';
-import CachedIcon from '@mui/icons-material/Cached';
+import React, { useState, useEffect } from 'react';
 import { AccountCircle } from '@mui/icons-material';
+import currencyService from '../ApiCalls/currencyService';
+import componentHelper from './componentHelper';
+var _ = require('lodash');
+
 
 const Convert = () => {
+  const [currencies, setCurrencies] = useState([]);
+  const [fromCurrency, setFromCurrency] = useState('')
+  const [toCurrency, setToCurrency] = useState('')
   const [amount, setAmount] = useState(0);
   const [from, setFrom] = useState('');
   const [to, setTo] = useState('');
@@ -23,6 +29,26 @@ const Convert = () => {
       setTo(value);
     }
   }
+
+  const handleChangeFromSelector =(event) => {
+    const { value } = event.target;
+    setFromCurrency(value)
+  }
+
+  const handleChangeToSelector =(event) => {
+    const { value } = event.target;
+    setToCurrency(value)
+  }
+
+  useEffect(() => {
+    const res = currencyService.getCurrencies()
+    res.then((val) => {
+      const data = _.get(val, 'data.data')
+      console.log(data)
+      const options = componentHelper.genCurrencySelectorOptions(data)
+      setCurrencies(options)
+    }).catch( console.error )
+  }, [])
 
   return (
     <Card sx={{ width: 1000 }}>
@@ -54,37 +80,55 @@ const Convert = () => {
               }}
               fullWidth
             />
-
           </Grid>
-          <Grid item xs={3.75}>
 
-            <TextField
-              id="from"
-              value={from}
-              name="from"
-              label="From"
-              variant="outlined"
-              onChange={handleChange}
-              fullWidth
-            />
-
+          <Grid item xs={4}>
+          <FormControl fullWidth>
+          <InputLabel id="demo-select-small-label">
+            From
+          </InputLabel>
+          <Select
+          labelId="select"
+          id="select-currency"
+          label="From"
+          value={fromCurrency}
+          onChange={handleChangeFromSelector}
+          fullWidth
+        >
+          {currencies.map((currency) => (
+            <MenuItem
+              key={currency}
+              value={currency}
+            >
+              {currency}
+            </MenuItem>
+          ))}
+        </Select>
+        </FormControl>
           </Grid>
-          <Grid item xs={0.5}>
-            <IconButton>
-              <CachedIcon />
-            </IconButton>
-          </Grid>
-          <Grid item xs={3.75}>
-
-            <TextField
-              id="to"
-              value={to}
-              name="to"
-              label="To"
-              variant="outlined"
-              onChange={handleChange}
-              fullWidth
-            />
+          <Grid item xs={4}>
+          <FormControl fullWidth>
+          <InputLabel id="demo-select-small-label">
+            To
+          </InputLabel>
+          <Select
+          labelId="select"
+          id="select-currency"
+          label="To"
+          value={toCurrency}
+          onChange={handleChangeToSelector}
+          fullWidth
+        >
+          {currencies.map((currency) => (
+            <MenuItem
+              key={currency}
+              value={currency}
+            >
+              {currency}
+            </MenuItem>
+          ))}
+        </Select>
+        </FormControl>
 
           </Grid>
 

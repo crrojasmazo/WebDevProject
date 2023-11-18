@@ -8,7 +8,7 @@ const getUsers = asyncMiddleware( async (_req, res) => {
     res.status(200).send(users)
 })
 
-const addUsers = async (req, res ) => {
+const addUsers = asyncMiddleware( async (req, res ) => {
     const {email, password} = req.body
     if( !email || !password) {
         throw new Error('Fill all fields')
@@ -28,19 +28,19 @@ const addUsers = async (req, res ) => {
         createdAt: new_user.createdAt,
         updatedAt: new_user.updatedAt
     })
-}
+})
 
-const updateUsers = async (req, res ) => {
+const updateUsers = asyncMiddleware ( async (req, res ) => {
     if(req.body?.name === '') throw new Error('Name is required')
     const updated_user = await User.findOneAndUpdate( { _id: req.params.id }, req.body, {new: true} )
     res.status(200).send( updated_user)
-}
+})
 
-const deleteUsers = async (req, res ) => {
+const deleteUsers = asyncMiddleware (async (req, res ) => {
     const user_id = req.params.id
     await User.findOneAndDelete(user_id)
     res.status(204).end()
-}
+})
 
 const login = asyncMiddleware( async (req, res)=> {
     const {email, password} = req.body

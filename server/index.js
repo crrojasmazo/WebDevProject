@@ -4,6 +4,7 @@ const cors = require('cors')
 const app = express();
 const db = require("../config/db")
 const  userRouter  = require('../services/users/users.routes');
+const  currencyRouter = require('../services/currency/currencies.routes');
 const errorMiddleware = require('../middleware/errorMiddleware');
 const path = require('path');
 
@@ -21,6 +22,7 @@ app.get('/', (_, res) => {
 }) 
 
 app.use('/api/users', userRouter )
+app.use('/api/currency', currencyRouter )
 app.use( errorMiddleware )
 
 
