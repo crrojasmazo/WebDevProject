@@ -1,9 +1,8 @@
-const express = require('express')
-const {  getCurrencyNames } = require('./currencies.controller')
+const express = require("express");
+const { getCurrencyNames } = require("./currencies.controller");
 
-const currencyRouter = express.Router()
+const currencyRouter = express.Router();
 
-currencyRouter.route('/')
-  .get(getCurrencyNames)
+currencyRouter.route("/").get(getCurrencyNames);
 
-module.exports = currencyRouter
+module.exports = currencyRouter;

@@ -1,22 +1,17 @@
-import {
-  useState, React, useEffect, useContext,
-} from 'react';
-import {
-  Container, Typography, TextField, Button,
-} from '@mui/material';
-import { Link } from 'react-router-dom';
-import { performLogIn } from './PageHelper';
-import { UserContext } from '../Context/Context';
-import authService from '../ApiCalls/authService';
-
+import { useState, React, useEffect, useContext } from "react";
+import { Container, Typography, TextField, Button } from "@mui/material";
+import { Link } from "react-router-dom";
+import { performLogIn } from "./PageHelper";
+import { UserContext } from "../Context/Context";
+import authService from "../ApiCalls/authService";
 
 const LoginPage = () => {
   const { user, setUser } = useContext(UserContext);
 
   const [formData, setFormData] = useState({
-    username: '',
-    password: '',
-    errorMessage: '',
+    username: "",
+    password: "",
+    errorMessage: "",
   });
 
   const handleInputChange = (e) => {
@@ -30,32 +25,36 @@ const LoginPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (formData.username !== '' && formData.password !== '') {
+    if (formData.username !== "" && formData.password !== "") {
       const res = authService.signin({
         email: formData.username,
-        password: formData.password
+        password: formData.password,
       });
-      res.then((val) => {
-        if(val.status === 200) {
-          setUser({
-            ...user,
-            isAuth: true,
-          });
-        } else {
+      res
+        .then((val) => {
+          if (val.status === 200) {
+            setUser({
+              ...user,
+              isAuth: true,
+            });
+          } else {
+            setFormData({
+              ...formData,
+              errorMessage: "An error occurred",
+            });
+          }
+        })
+        .catch(
           setFormData({
             ...formData,
-            errorMessage: 'An error occurred',
-          });
-        }
-      }).catch(setFormData({
-        ...formData,
-        password: '',
-        errorMessage: 'An error occurred',
-      }))
+            password: "",
+            errorMessage: "An error occurred",
+          })
+        );
     } else {
       setFormData({
         ...formData,
-        errorMessage: 'Type username and password',
+        errorMessage: "Type username and password",
       });
     }
   };
@@ -63,12 +62,16 @@ const LoginPage = () => {
   useEffect(() => {
     setFormData({
       ...formData,
-      errorMessage: '',
+      errorMessage: "",
     });
   }, [formData.username, formData.password]);
 
   return (
-    <Container id="login_container" maxWidth="xl" className="bg-light text-dark vh-100">
+    <Container
+      id="login_container"
+      maxWidth="xl"
+      className="bg-light text-dark vh-100"
+    >
       <Container maxWidth="xs">
         <div style={{ paddingTop: 50 }}>
           <form onSubmit={handleSubmit}>
@@ -95,7 +98,9 @@ const LoginPage = () => {
               onChange={handleInputChange}
             />
 
-            <Typography variant="body1" color="error" align="center">{formData.errorMessage}</Typography>
+            <Typography variant="body1" color="error" align="center">
+              {formData.errorMessage}
+            </Typography>
             <Button
               type="submit"
               variant="contained"
@@ -108,14 +113,10 @@ const LoginPage = () => {
             >
               Login
             </Button>
-
           </form>
           <Typography variant="body2" align="center" marginTop={2}>
-            {"Don't have an account yet? Sign Up  "}
-            {' '}
-            <Link to="/register">
-              Here
-            </Link>
+            {"Don't have an account yet? Sign Up  "}{" "}
+            <Link to="/register">Here</Link>
           </Typography>
         </div>
       </Container>

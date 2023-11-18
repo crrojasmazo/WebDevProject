@@ -1,21 +1,30 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState } from "react";
 import {
-  AppBar, Box, Toolbar, Button, Container, Avatar, Tooltip, IconButton, Modal, Typography,
-} from '@mui/material';
-import { Link, Navigate } from 'react-router-dom';
-import currencyapplogo from '../Assets/Images/currencyapplogo.png';
-import dogfire from '../Assets/Images/dogfire.jpg';
-import { UserContext } from '../Context/Context';
-import HeaderMenu from '../Components/HeaderMenu';
+  AppBar,
+  Box,
+  Toolbar,
+  Button,
+  Container,
+  Avatar,
+  Tooltip,
+  IconButton,
+  Modal,
+  Typography,
+} from "@mui/material";
+import { Link, Navigate } from "react-router-dom";
+import currencyapplogo from "../Assets/Images/currencyapplogo.png";
+import dogfire from "../Assets/Images/dogfire.jpg";
+import { UserContext } from "../Context/Context";
+import HeaderMenu from "../Components/HeaderMenu";
 
 const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
   width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
+  bgcolor: "background.paper",
+  border: "2px solid #000",
   boxShadow: 24,
   p: 4,
 };
@@ -65,48 +74,63 @@ const Header = () => {
             </Box>
 
             <Box sx={{ flexGrow: 1 }} />
-            <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-              {user.isAuth
-                ? (
-
-                  <Tooltip title="Account settings">
-                    <IconButton
-                      onClick={handleClick}
-                      size="small"
-                      sx={{ ml: 2 }}
-                    >
-                      <Avatar alt="User profile picture" src={dogfire} sx={{ width: 56, height: 56 }} />
-                    </IconButton>
-                  </Tooltip>
-                ) : (
-                  <Link to="/login">
-                    <Button variant="contained" color="secondary">Log In</Button>
-                  </Link>
-                )}
+            <Box sx={{ display: { xs: "none", md: "flex" } }}>
+              {user.isAuth ? (
+                <Tooltip title="Account settings">
+                  <IconButton onClick={handleClick} size="small" sx={{ ml: 2 }}>
+                    <Avatar
+                      alt="User profile picture"
+                      src={dogfire}
+                      sx={{ width: 56, height: 56 }}
+                    />
+                  </IconButton>
+                </Tooltip>
+              ) : (
+                <Link to="/login">
+                  <Button variant="contained" color="secondary">
+                    Log In
+                  </Button>
+                </Link>
+              )}
             </Box>
 
-            <HeaderMenu open={open} handleClose={handleClose} anchorEl={anchorEl} handleOpenModal={handleOpenModal} />
-
+            <HeaderMenu
+              open={open}
+              handleClose={handleClose}
+              anchorEl={anchorEl}
+              handleOpenModal={handleOpenModal}
+            />
           </Toolbar>
-          <Modal
-            open={openModal}
-            onClose={handleCloseModal}
-          >
+          <Modal open={openModal} onClose={handleCloseModal}>
             <Box sx={style}>
-              <Typography id="modal-modal-title" variant="h6" component="h2" textAlign="center">
+              <Typography
+                id="modal-modal-title"
+                variant="h6"
+                component="h2"
+                textAlign="center"
+              >
                 Do you want to leave?
               </Typography>
               <Box display="flex" justifyContent="center">
-                <Button variant="contained" color="secondary" onClick={handleLeave} sx={{ margin: 1 }}>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={handleLeave}
+                  sx={{ margin: 1 }}
+                >
                   Yes, leave
                 </Button>
-                <Button variant="contained" color="primary" onClick={handleContinue} sx={{ margin: 1 }}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleContinue}
+                  sx={{ margin: 1 }}
+                >
                   No, continue
                 </Button>
               </Box>
             </Box>
           </Modal>
-
         </Container>
       </AppBar>
     </Box>

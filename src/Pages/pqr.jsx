@@ -1,18 +1,28 @@
-import { useState, React, Fragment } from 'react';
+import { useState, React, Fragment } from "react";
 import {
-  Container, Typography, TextField, Button, MenuItem, InputLabel,
-  FormControl, Select, Box, Accordion, AccordionSummary, AccordionDetails,
-} from '@mui/material';
-import { Link } from 'react-router-dom';
+  Container,
+  Typography,
+  TextField,
+  Button,
+  MenuItem,
+  InputLabel,
+  FormControl,
+  Select,
+  Box,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+} from "@mui/material";
+import { Link } from "react-router-dom";
 
-import { ExpandMore } from '@mui/icons-material';
-import { faqs } from './PageHelper';
+import { ExpandMore } from "@mui/icons-material";
+import { faqs } from "./PageHelper";
 
 const pqr = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    inquiry: '',
+    name: "",
+    email: "",
+    inquiry: "",
   });
 
   const handleInputChange = (e) => {
@@ -26,15 +36,19 @@ const pqr = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Add authentication logic here
-    console.log('Form submitted with data:', formData);
+    console.log("Form submitted with data:", formData);
   };
 
   return (
-    <Container id="pqr_container" maxWidth="xl" className="bg-light text-dark vh-100">
+    <Container
+      id="pqr_container"
+      maxWidth="xl"
+      className="bg-light text-dark vh-100"
+    >
       <Container maxWidth="sm">
         <div style={{ paddingTop: 50 }}>
           {faqs.map((faq, index) => (
-          // eslint-disable-next-line react/no-array-index-key
+            // eslint-disable-next-line react/no-array-index-key
             <Accordion key={index}>
               <AccordionSummary expandIcon={<ExpandMore />}>
                 <Typography variant="h6">{faq.question}</Typography>
@@ -104,7 +118,6 @@ const pqr = () => {
         </form>
       </Container>
     </Container>
-
   );
 };
 

@@ -1,36 +1,34 @@
 //index.js
-const express = require('express');
-const cors = require('cors')
+const express = require("express");
+const cors = require("cors");
 const app = express();
-const db = require("../config/db")
-const  userRouter  = require('../services/users/users.routes');
-const  currencyRouter = require('../services/currency/currencies.routes');
-const errorMiddleware = require('../middleware/errorMiddleware');
-const path = require('path');
+const db = require("../config/db");
+const userRouter = require("../services/users/users.routes");
+const currencyRouter = require("../services/currency/currencies.routes");
+const errorMiddleware = require("../middleware/errorMiddleware");
+const path = require("path");
 
-app.use(express.json())  // middleware que transforma la req.body en un json
-app.use(cors())
+app.use(express.json()); // middleware que transforma la req.body en un json
+app.use(cors());
 
-const PORT = process.env.PORT
+const PORT = process.env.PORT;
 
-app.use(express.static("build"))
+app.use(express.static("build"));
 
-db()
+db();
 
-app.get('/', (_, res) => {
-      console.log('someone pinged here!!');
-}) 
+app.get("/", (_, res) => {
+  console.log("someone pinged here!!");
+});
 
-app.use('/api/users', userRouter )
-app.use('/api/currency', currencyRouter )
-app.use( errorMiddleware )
+app.use("/api/users", userRouter);
+app.use("/api/currency", currencyRouter);
+app.use(errorMiddleware);
 
-
-
-app.get('*', (req, res) => {
-      res.sendFile(path.join(__dirname, '../build', 'index.html'));
-    });
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "../build", "index.html"));
+});
 
 app.listen(PORT, () => {
-      console.log(`Server listening on port ${PORT}`)
-})
+  console.log(`Server listening on port ${PORT}`);
+});
