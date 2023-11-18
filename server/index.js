@@ -17,10 +17,6 @@ app.use(express.static("build"));
 
 db();
 
-app.get("/", (_, res) => {
-  console.log("someone pinged here!!");
-});
-
 app.use("/api/users", userRouter);
 app.use("/api/currency", currencyRouter);
 app.use(errorMiddleware);

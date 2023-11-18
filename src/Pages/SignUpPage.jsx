@@ -23,8 +23,6 @@ const SignUpPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log("Form submitted with data:", formData);
-
     if (formData.username === "" && formData.password === "") {
       setFormData({
         ...formData,

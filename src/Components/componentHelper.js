@@ -1,14 +1,11 @@
 const genCurrencySelectorOptions = (data) => {
-    const dataCopied = JSON.parse(JSON.stringify(data));
-    const selectorValues = Object.keys(dataCopied)
-    console.log('xd')
-    console.log(selectorValues)
-    return selectorValues
-}
-
+  const dataCopied = JSON.parse(JSON.stringify(data));
+  const selectorValues = Object.keys(dataCopied);
+  return selectorValues;
+};
 
 const componentHelper = {
-    genCurrencySelectorOptions,
-}
+  genCurrencySelectorOptions,
+};
 
-export default componentHelper
+export default componentHelper;

@@ -11,6 +11,7 @@ import {
   MenuItem,
   FormControl,
   InputLabel,
+  Typography,
 } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { AccountCircle } from "@mui/icons-material";
@@ -20,11 +21,10 @@ var _ = require("lodash");
 
 const Convert = () => {
   const [currencies, setCurrencies] = useState([]);
-  const [fromCurrency, setFromCurrency] = useState("");
-  const [toCurrency, setToCurrency] = useState("");
-  const [amount, setAmount] = useState(0);
-  const [from, setFrom] = useState("");
-  const [to, setTo] = useState("");
+  const [fromCurrency, setFromCurrency] = useState("COP");
+  const [toCurrency, setToCurrency] = useState("USD");
+  const [amount, setAmount] = useState(50000);
+  const [valueConverted, setValueConverted] = useState(null);
 
   function handleChange(event) {
     // gives the value of the targetted element
@@ -32,10 +32,6 @@ const Convert = () => {
     const inputName = event.target.name;
     if (inputName === "amount") {
       setAmount(value);
-    } else if (inputName === "from") {
-      setFrom(value);
-    } else if (inputName === "to") {
-      setTo(value);
     }
   }
 
@@ -49,17 +45,37 @@ const Convert = () => {
     setToCurrency(value);
   };
 
+  const handleConvertion = (e) => {
+    e.preventDefault();
+    const res = currencyService.convertCurency({
+      value: amount,
+      fromCurrency: fromCurrency,
+      toCurrency: toCurrency,
+    });
+    res
+      .then((val) => {
+        const value = _.get(val, "data.valueConverted");
+        if (value) {
+          setValueConverted(value);
+        }
+      })
+      .catch(console.error);
+  };
+
   useEffect(() => {
     const res = currencyService.getCurrencies();
     res
       .then((val) => {
         const data = _.get(val, "data.data");
-        console.log(data);
         const options = componentHelper.genCurrencySelectorOptions(data);
         setCurrencies(options);
       })
       .catch(console.error);
   }, []);
+
+  useEffect(() => {
+    setValueConverted(null);
+  }, [amount, fromCurrency, toCurrency]);
 
   return (
     <Card sx={{ width: 1000 }}>
@@ -71,6 +87,16 @@ const Convert = () => {
           alignItems="center"
           justifyContent="center"
         >
+          {valueConverted ? (
+            <Grid item xs={12} md={12}>
+              <Typography variant="h4" component="h2">
+                {amount} {fromCurrency} are{" "}
+                {(Math.round(valueConverted * 100) / 100).toFixed(2)}{" "}
+                {toCurrency}
+              </Typography>
+              <br />
+            </Grid>
+          ) : null}
           <Grid item xs={4}>
             <TextField
               id="amount"
@@ -133,7 +159,7 @@ const Convert = () => {
         </Grid>
       </CardContent>
       <CardActions>
-        <Button size="small" variant="contained">
+        <Button size="small" variant="contained" onClick={handleConvertion}>
           Convert
         </Button>
       </CardActions>
