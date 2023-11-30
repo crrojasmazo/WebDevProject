@@ -23,26 +23,66 @@ const MainIndex = () => (
       <Grid item xs={1}>
         <Grid container>
           <Grid item xs={4}>
-            <img style={{ height: "90%" }} src={imagen1} alt="primera imagen" />
+            <p>
+            Packs de Yu-Gi-Oh!
+            Grandpa Pack
+            Exodia
+            GenericAttribute Link Monsters
+            Gravekeepers
+            killDrainCards
+            TerraformingCards
+            Mai Pack
+            Harpy Ladies
+            Amazoness
+            Guardians
+            Insects
+            SummonSorceress
+            Bakura Pack
+            Toons
+            Agents
+            enericZombies
+            WingedDragon of Ra SphereMode
+            DestinyBoard
+            Fiends
+            </p>
           </Grid>
           <Grid item xs={4}>
-            <img
-              style={{ height: "90%" }}
-              src={grafica1}
-              alt="primera grafica"
-            />
-          </Grid>
-        </Grid>
-        <Grid container>
-          <Grid item xs={4}>
-            <img style={{ height: "75%" }} src={imagen2} alt="segunda imagen" />
-          </Grid>
-          <Grid item xs={4}>
-            <img
-              style={{ height: "70%" }}
-              src={grafica2}
-              alt="segunda grafica"
-            />
+            <header>
+            <h1>What is the real value of a currency compared to other?</h1> 
+            </header>
+            <p>
+            Is there really a way to determine if a currency is undervalued or overvalued in an objective way? It is a question that keeps getting asked in the global market due to a supposed advantage from certain countries in respect to other countries when there are trade disputes.
+            </p>
+            <p>
+            The main problem lies into the speculative aspect of the big market where currencies can be extremely volatile and the introduction of cryptocurrencies into the equation made the situation even worse. For example in 1992, George Soros bet one billion dollars against the British pound under the speculation of the British currency being highly overvalued giving pressure to the banks making it crash at the end forcing United Kingdom to leave the European exchange rate mechanism which was the precursor of the euro.
+            </p>
+            <p>
+            This feat has never been repeated after that in a consistent and convincing way with other currencies, mainly because there is not a real method to determine if a currency is properly valued or not. This is something to consider when an analysis of the market is being done since exchange rates can be heavily impacted by the way the countries manage their own markets avoiding inflation or deflation inside trade deals.
+            </p>
+            <header>
+            <h2>What is the cost of anything?</h2> 
+            </header>
+            <p>
+            People are used to the nominal exchange rate of some things in their daily life and sometimes they are familiar with certain currencies different to what they usually use in their daily basis. But that custom can make it difficult to have an objective view of what the price of something can actually be, so it is not a surprise that the price difference between the same product in different instances can be worrying, controversial or even confusing because that hole in the popular knowledge doesn’t let the normal citizen to realize if a price is real, fair or not.
+            </p>
+            <p>
+            The same thing happens with currencies, the exchange rates may be different depending not only in the local currency and economy but also in the geographical location leaving holes inside the market itself allowing things like money laundering to happen easier. But this has also another consequence which in a large scale can be more devastating for a company or an individual, this is because jumping between currencies can lead to money loss if there is not enough care and this is due to the exchange rate changing over the reference.
+            </p>
+            <p>
+            Thinking about how to make currencies more stable in a global market can be a difficult task, there are several mathematical models that try to emulate a pseudo stable global economy but with the differences there are today between government regimes it looks like an impossible task and that idea is feed up by how the market works because the seller wants to have earnings of the transaction and that’s something that applies to currencies as well.
+            </p>
+            <header>
+            <h3>The market role with the cyptocurrencies</h3> 
+            </header>
+            <p>
+            Cryptocurrencies have been a matter of controversy since their conception and that is because of the speculative nature of the currency itself making it extremely volatile and susceptible to failure due to small mistakes or market manipulation. This is something that has been happening from the beginning making them unreliable.
+            </p>
+            <p>
+            A good example of this was how Elon Musk made bitcoin fall 12% only by saying that Tesla, his company, will not accept that currency as payment which is something that is expected not to happen with normal currencies. This is why the global market is scared of the idea of adding cryptocurrencies as another alternative currency.
+            </p>
+            <p>
+            The way cryptocurrencies are becoming more and more popular with the time has shown possibilities and issues by proving how unreliable they are as a currency but also showing to the global market how their own currencies have an unstable value that can be altered as easy as crypto but in different situations. That leads to how the economic system has poor protections against market manipulation and in consequence poor protection against a currency fallout and that’s why it is possible to see entities like wall street group playing with small companies to make a profit at the cost of the external stability.
+            </p>
           </Grid>
         </Grid>
       </Grid>
