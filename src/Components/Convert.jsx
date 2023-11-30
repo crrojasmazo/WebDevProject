@@ -94,7 +94,7 @@ const Convert = () => {
                 {(Math.round(valueConverted * 100) / 100).toFixed(2)}{" "}
                 {toCurrency}
               </Typography>
-              <br />
+              <hr />
             </Grid>
           ) : null}
           <Grid item xs={4}>

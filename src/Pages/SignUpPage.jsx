@@ -1,11 +1,31 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Container, Typography, TextField, Button } from "@mui/material";
+import {
+  Container,
+  Typography,
+  TextField,
+  Button,
+  Snackbar,
+  Alert,
+} from "@mui/material";
 import { Link } from "react-router-dom";
 import authService from "../ApiCalls/authService";
 import { UserContext } from "../Context/Context";
 
 const SignUpPage = () => {
   const { user, setUser } = useContext(UserContext);
+
+  const [open, setOpen] = useState(false);
+
+  const handleClickSnackbar = () => {
+    setOpen(true);
+  };
+
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
   const [formData, setFormData] = useState({
     username: "",
     password: "",
@@ -38,6 +58,7 @@ const SignUpPage = () => {
     res
       .then((val) => {
         if (val.status === 201) {
+          setOpen(true);
           setUser({
             ...user,
             isAuth: true,
@@ -71,6 +92,19 @@ const SignUpPage = () => {
       maxWidth="xl"
       className="bg-light text-dark vh-100"
     >
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+      >
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
+          you are in!
+        </Alert>
+      </Snackbar>
       <Container maxWidth="xs">
         <div style={{ paddingTop: 50 }}>
           <form onSubmit={handleSubmit}>
@@ -101,6 +135,7 @@ const SignUpPage = () => {
             </Typography>
             <Button
               type="submit"
+              disabled={user.isAuth}
               variant="contained"
               color="primary"
               fullWidth

@@ -1,5 +1,12 @@
 import { useState, React, useEffect, useContext } from "react";
-import { Container, Typography, TextField, Button } from "@mui/material";
+import {
+  Container,
+  Typography,
+  TextField,
+  Button,
+  Snackbar,
+  Alert,
+} from "@mui/material";
 import { Link } from "react-router-dom";
 import { performLogIn } from "./PageHelper";
 import { UserContext } from "../Context/Context";
@@ -7,6 +14,21 @@ import authService from "../ApiCalls/authService";
 
 const LoginPage = () => {
   const { user, setUser } = useContext(UserContext);
+
+  const [open, setOpen] = useState(false);
+  const [openError, setOpenError] = useState(false);
+
+  const handleClickSnackbar = () => {
+    setOpen(true);
+  };
+
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenError(false);
+    setOpen(false);
+  };
 
   const [formData, setFormData] = useState({
     username: "",
@@ -37,20 +59,24 @@ const LoginPage = () => {
               ...user,
               isAuth: true,
             });
+            setOpenError(false);
+            setOpen(true);
           } else {
+            setOpenError(true);
             setFormData({
               ...formData,
               errorMessage: "An error occurred",
             });
           }
         })
-        .catch(
+        .catch((e) => {
+          console.log(e);
+          setOpenError(true);
           setFormData({
             ...formData,
-            password: "",
-            errorMessage: "An error occurred",
-          })
-        );
+            errorMessage: "Wrong user or password, try again",
+          });
+        });
     } else {
       setFormData({
         ...formData,
@@ -72,6 +98,32 @@ const LoginPage = () => {
       maxWidth="xl"
       className="bg-light text-dark vh-100"
     >
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+      >
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
+          You are successfully logged in
+        </Alert>
+      </Snackbar>
+      <Snackbar
+        open={openError}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+      >
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity="error"
+          sx={{ width: "100%" }}
+        >
+          Try again!
+        </Alert>
+      </Snackbar>
       <Container maxWidth="xs">
         <div style={{ paddingTop: 50 }}>
           <form onSubmit={handleSubmit}>
@@ -104,6 +156,7 @@ const LoginPage = () => {
             <Button
               type="submit"
               variant="contained"
+              disabled={user.isAuth}
               color="primary"
               fullWidth
               size="large"
