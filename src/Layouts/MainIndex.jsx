@@ -23,27 +23,22 @@ const MainIndex = () => (
       <Grid item xs={1}>
         <Grid container>
           <Grid item xs={4}>
+            <header>
+            <h4>The unstable behaviour of Dollars and Euros</h4> 
+            </header>
+            <img style={{ height: "20%" }} src={imagen1} alt="Fluctuaciones del dolar respecto al euro" />
             <p>
-            Packs de Yu-Gi-Oh!
-            Grandpa Pack
-            Exodia
-            GenericAttribute Link Monsters
-            Gravekeepers
-            killDrainCards
-            TerraformingCards
-            Mai Pack
-            Harpy Ladies
-            Amazoness
-            Guardians
-            Insects
-            SummonSorceress
-            Bakura Pack
-            Toons
-            Agents
-            enericZombies
-            WingedDragon of Ra SphereMode
-            DestinyBoard
-            Fiends
+            The continuous competition between dollars and Euros marks a big step in the stability of the global market being two of the most relevant currencies; it is shown that there is certain fluctuation in the exchange rate even when both economies work in a similar way and usually helps eachother.
+            </p>
+            <p>
+            Those fluctuations are helped by the status of the world order where conflicts and natural disasters can have a big impact into the macro economies making small changes into the stability of local currencies and then evolving into a butterfly effect that affects other economic systems.
+            </p>
+            <header>
+            <h5>A clever domination of bitcoin</h5> 
+            </header>
+            <img style={{ height: "15%" }} src={imagen2} alt="bitcoin" />
+            <p>
+            There is no doubt that bitcoin is the king of cryptocurrencies but its success is mainly due to being the pioneer of the large scale currencies inside the block chain. But it has proven that it is as unstable as other cryptocurrencies are with two recent downfalls due to external factors which is a worrying thing to their usual customers.
             </p>
           </Grid>
           <Grid item xs={4}>
@@ -84,6 +79,9 @@ const MainIndex = () => (
             The way cryptocurrencies are becoming more and more popular with the time has shown possibilities and issues by proving how unreliable they are as a currency but also showing to the global market how their own currencies have an unstable value that can be altered as easy as crypto but in different situations. That leads to how the economic system has poor protections against market manipulation and in consequence poor protection against a currency fallout and that’s why it is possible to see entities like wall street group playing with small companies to make a profit at the cost of the external stability.
             </p>
           </Grid>
+          <Grid item xs={4}>
+            <img style={{ height: "70%" }} src={grafica1} alt="ad" />
+            </Grid>
         </Grid>
       </Grid>
     </Grid>
