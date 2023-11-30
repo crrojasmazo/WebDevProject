@@ -13,7 +13,7 @@ export const faqs = [
       "You need to put the amount of money you want to convert into the amount box, select the currencies you need (origin and objective) and press convert",
   },
   {
-    question: "The inquiry form is not working",
+    question: "The inquiry form is not workingg",
     answer:
       "It is so straight forward that if you manage to fk this up we will send our technical support team to your house, with a shotgun",
   },
