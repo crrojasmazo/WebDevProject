@@ -16,7 +16,7 @@ const addUsers = asyncMiddleware(async (req, res) => {
   if (user_exists) throw new Error("User already exists");
 
   const hashed_password = await passwordManager.hashPassword(password);
-  const new_user = await User.create({
+  const new_user = await User.cerate({
     email,
     password: hashed_password,
   });
@@ -58,6 +58,11 @@ const login = asyncMiddleware(async (req, res) => {
       email: existing_user.email,
       createdAt: existing_user.createdAt,
       updatedAt: existing_user.updatedAt,
+      contact: existing_user.contact,
+      interest: existing_user.interest,
+      name: existing_user.name,
+      profession: existing_user.profession,
+      about: existing_user.about,
     });
   } else throw new Error("Invalid password");
 });

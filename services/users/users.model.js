@@ -11,6 +11,26 @@ const UserSchema = mongoose.Schema(
       require: true,
       type: String,
     },
+    name: {
+      require: false,
+      type: String,
+    },
+    profession: {
+      require: false,
+      type: String,
+    },
+    about: {
+      require: false,
+      type: String,
+    },
+    interest: {
+      require: false,
+      type: String,
+    },
+    contact: {
+      require: false,
+      type: String,
+    },
   },
   {
     timestamps: true,

@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import { performLogIn } from "./PageHelper";
 import { UserContext } from "../Context/Context";
 import authService from "../ApiCalls/authService";
+import _ from "lodash";
 
 const LoginPage = () => {
   const { user, setUser } = useContext(UserContext);
@@ -56,7 +57,7 @@ const LoginPage = () => {
         .then((val) => {
           if (val.status === 200) {
             setUser({
-              ...user,
+              ..._.get(val, "data", {}),
               isAuth: true,
             });
             setOpenError(false);
