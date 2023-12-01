@@ -16,7 +16,7 @@ const addUsers = asyncMiddleware(async (req, res) => {
   if (user_exists) throw new Error("User already exists");
 
   const hashed_password = await passwordManager.hashPassword(password);
-  const new_user = await User.cerate({
+  const new_user = await User.create({
     email,
     password: hashed_password,
   });

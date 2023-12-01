@@ -7,7 +7,7 @@ import {
   Snackbar,
   Alert,
 } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { performLogIn } from "./PageHelper";
 import { UserContext } from "../Context/Context";
 import authService from "../ApiCalls/authService";
@@ -15,9 +15,10 @@ import _ from "lodash";
 
 const LoginPage = () => {
   const { user, setUser } = useContext(UserContext);
-
   const [open, setOpen] = useState(false);
   const [openError, setOpenError] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleClickSnackbar = () => {
     setOpen(true);
@@ -62,6 +63,7 @@ const LoginPage = () => {
             });
             setOpenError(false);
             setOpen(true);
+            navigate("/");
           } else {
             setOpenError(true);
             setFormData({

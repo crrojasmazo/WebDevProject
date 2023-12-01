@@ -7,7 +7,7 @@ import {
   Snackbar,
   Alert,
 } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import authService from "../ApiCalls/authService";
 import { UserContext } from "../Context/Context";
 
@@ -15,6 +15,8 @@ const SignUpPage = () => {
   const { user, setUser } = useContext(UserContext);
 
   const [open, setOpen] = useState(false);
+
+  const navigate = useNavigate();
 
   const handleClickSnackbar = () => {
     setOpen(true);
@@ -63,6 +65,7 @@ const SignUpPage = () => {
             ...user,
             isAuth: true,
           });
+          navigate("/");
         } else {
           setFormData({
             ...formData,
