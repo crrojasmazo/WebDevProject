@@ -46,6 +46,12 @@ const LoginPage = () => {
     });
   };
 
+  const goToHome = () => {
+    setTimeout(() => {
+      navigate("/");
+    }, "1000");
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -63,7 +69,7 @@ const LoginPage = () => {
             });
             setOpenError(false);
             setOpen(true);
-            navigate("/");
+            goToHome();
           } else {
             setOpenError(true);
             setFormData({

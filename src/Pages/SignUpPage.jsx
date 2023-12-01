@@ -22,6 +22,12 @@ const SignUpPage = () => {
     setOpen(true);
   };
 
+  const goToHome = () => {
+    setTimeout(() => {
+      navigate("/");
+    }, "1000");
+  };
+
   const handleCloseSnackbar = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -65,7 +71,7 @@ const SignUpPage = () => {
             ...user,
             isAuth: true,
           });
-          navigate("/");
+          goToHome();
         } else {
           setFormData({
             ...formData,
