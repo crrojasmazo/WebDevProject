@@ -48,10 +48,7 @@ const Header = () => {
   };
 
   const logout = () => {
-    setUser({
-      ...user,
-      isAuth: false,
-    });
+    setUser({});
   };
 
   const handleLeave = () => {

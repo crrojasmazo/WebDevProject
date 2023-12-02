@@ -9,7 +9,7 @@ import {
   Box,
   Typography,
 } from "@mui/material";
-import { Settings, Logout } from "@mui/icons-material";
+import { Settings, Logout, Comment } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
 const HeaderMenu = ({ open, handleClose, anchorEl, handleOpenModal }) => (
@@ -60,6 +60,14 @@ const HeaderMenu = ({ open, handleClose, anchorEl, handleOpenModal }) => (
           <Settings fontSize="small" />
         </ListItemIcon>
         FAQs
+      </MenuItem>
+    </Link>
+    <Link to="/message" style={{ color: "black", textDecoration: "none" }}>
+      <MenuItem>
+        <ListItemIcon>
+          <Comment fontSize="small" />
+        </ListItemIcon>
+        Messages
       </MenuItem>
     </Link>
     <MenuItem onClick={handleOpenModal}>

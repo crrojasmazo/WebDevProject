@@ -69,6 +69,7 @@ const SignUpPage = () => {
           setOpen(true);
           setUser({
             ...user,
+            ..._.get(val, "data", {}),
             isAuth: true,
           });
           goToHome();

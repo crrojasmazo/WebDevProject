@@ -9,6 +9,7 @@ import Layout from "./Layouts/Layout";
 import { UserContext } from "./Context/Context";
 import ProtectedRoute from "./Components/ProtectedRoute";
 import ProfilePage from "./Pages/ProfilePage";
+import Message from "./Pages/MessagePage";
 
 const App = () => {
   const [user, setUser] = useState({
@@ -39,6 +40,14 @@ const App = () => {
             element={
               <ProtectedRoute user={user}>
                 <Pqr />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/message"
+            element={
+              <ProtectedRoute user={user}>
+                <Message />
               </ProtectedRoute>
             }
           />
