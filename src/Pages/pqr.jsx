@@ -1,4 +1,4 @@
-import { useState, React, Fragment } from "react";
+import { useState, React, useContext, useEffect } from "react";
 import {
   Container,
   Typography,
@@ -12,17 +12,24 @@ import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
+  Snackbar,
+  Alert,
 } from "@mui/material";
-import { Link } from "react-router-dom";
+import faqService from "../ApiCalls/faqService";
+import { UserContext } from "../Context/Context";
+import _ from "lodash";
 
 import { ExpandMore } from "@mui/icons-material";
 import { faqs } from "./PageHelper";
 
 const pqr = () => {
+  const { user, setUser } = useContext(UserContext);
+  const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    inquiry: "",
+    inquiryType: "",
+    description: "",
   });
 
   const handleInputChange = (e) => {
@@ -33,10 +40,49 @@ const pqr = () => {
     });
   };
 
+  const handleCloseSnackbar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen(false);
+  };
+
+  useEffect(() => {
+    setFormData({
+      ...formData,
+      name: _.get(user, "name", ""),
+      email: _.get(user, "email", ""),
+    });
+  }, []);
+
+  const cleanForm = () => {
+    setFormData({
+      ...formData,
+      name: _.get(user, "name", ""),
+      email: _.get(user, "email", ""),
+      inquiryType: "",
+      description: "",
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // Add authentication logic here
-    console.log("Form submitted with data:", formData);
+    const res = faqService.createFaq({
+      userid: _.get(user, "_id", "nn"),
+      name: formData.name,
+      email: formData.email,
+      inqType: formData.inquiryType,
+      description: formData.description,
+    });
+    res
+      .then((val) => {
+        if (val.status == 201) {
+          setOpen(true);
+          cleanForm();
+        }
+      })
+      .catch(console.log);
   };
 
   return (
@@ -45,6 +91,19 @@ const pqr = () => {
       maxWidth="xl"
       className="bg-light text-dark vh-100"
     >
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+      >
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
+          Your FAQ has been sent!
+        </Alert>
+      </Snackbar>
       <Container maxWidth="sm">
         <div style={{ paddingTop: 50 }}>
           {faqs.map((faq, index) => (
@@ -77,7 +136,6 @@ const pqr = () => {
           <TextField
             label="Email"
             name="email"
-            type="email"
             variant="outlined"
             fullWidth
             value={formData.email}
@@ -100,12 +158,12 @@ const pqr = () => {
           </FormControl>
           <TextField
             label="Description"
-            name="inquiry"
+            name="description"
             variant="outlined"
             multiline
             fullWidth
             rows={4}
-            value={formData.inquiry}
+            value={formData.description}
             onChange={handleInputChange}
             required
             margin="normal"
