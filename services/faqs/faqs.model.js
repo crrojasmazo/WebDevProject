@@ -22,6 +22,11 @@ const FaqSchema = mongoose.Schema(
       require: true,
       type: String,
     },
+    answers: {
+      require: false,
+      type: [String],
+      default: [],
+    },
   },
   {
     timestamps: true,

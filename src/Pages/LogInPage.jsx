@@ -62,7 +62,6 @@ const LoginPage = () => {
       });
       res
         .then((val) => {
-          console.log(val);
           if (val.status === 200) {
             setUser({
               ..._.get(val, "data", {}),

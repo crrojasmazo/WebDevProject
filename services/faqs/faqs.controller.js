@@ -1,6 +1,6 @@
 const Faq = require("./faqs.model");
 const asyncMiddleware = require("../../middleware/asyncMiddleware");
-const passwordManager = require("../../utils/passwordManager");
+const ObjectId = require("mongodb").ObjectId;
 
 const getFaqs = asyncMiddleware(async (_req, res) => {
   const faqs = await Faq.find();
@@ -28,6 +28,7 @@ const addFaqs = asyncMiddleware(async (req, res) => {
     email: new_faq.email,
     inqType: new_faq.inqType,
     description: new_faq.description,
+    answers: new_faq.answers,
     createdAt: new_faq.createdAt,
     updatedAt: new_faq.updatedAt,
   });
@@ -39,8 +40,23 @@ const getFaqsById = asyncMiddleware(async (req, res) => {
   res.status(200).send(faqsById);
 });
 
+const answerFaq = asyncMiddleware(async (req, res) => {
+  const { faqid, answer } = req.body;
+  var id = new ObjectId(faqid);
+  const updatedFaq = await Faq.findOneAndUpdate(
+    id,
+    { $push: { answers: answer } },
+    { new: true }
+  );
+  if (!updatedFaq) {
+    throw new Error("No document found");
+  }
+  res.status(200).send(updatedFaq);
+});
+
 module.exports = {
   addFaqs,
   getFaqs,
   getFaqsById,
+  answerFaq,
 };

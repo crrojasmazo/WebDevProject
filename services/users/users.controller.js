@@ -52,7 +52,6 @@ const login = asyncMiddleware(async (req, res) => {
     throw new Error("Invalid email");
   }
 
-  console.log(existing_user);
   if (await passwordManager.comparePassword(password, existing_user.password)) {
     res.status(200).send({
       _id: existing_user._id,
