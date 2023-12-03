@@ -15,11 +15,10 @@ import {
 import faqService from "../ApiCalls/faqService";
 import { UserContext } from "../Context/Context";
 import _ from "lodash";
-import EmptyView from "../Components/EmptyView";
 
 import { ExpandMore } from "@mui/icons-material";
 
-const Message = () => {
+const ManageUsers = () => {
   const { user, setUser } = useContext(UserContext);
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState([]);
@@ -191,59 +190,55 @@ const Message = () => {
       </Modal>
       <Container maxWidth="sm">
         <div style={{ paddingTop: 50 }}>
-          {messages.length > 0 ? (
-            messages.map((message, index) => (
-              // eslint-disable-next-line react/no-array-index-key
-              <Accordion key={index}>
-                <AccordionSummary expandIcon={<ExpandMore />}>
-                  <Typography variant="h6">
-                    <b>{message.inqType}</b>
-                  </Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <Typography>
-                    <b>Email: </b>
-                    {message.email}
-                  </Typography>
-                  <Typography>
-                    <b>Name: </b>
-                    {message.name}
-                  </Typography>
+          {messages.map((message, index) => (
+            // eslint-disable-next-line react/no-array-index-key
+            <Accordion key={index}>
+              <AccordionSummary expandIcon={<ExpandMore />}>
+                <Typography variant="h6">
+                  <b>{message.inqType}</b>
+                </Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Typography>
+                  <b>Email: </b>
+                  {message.email}
+                </Typography>
+                <Typography>
+                  <b>Name: </b>
+                  {message.name}
+                </Typography>
 
+                <Typography noWrap>
+                  <b>Description: </b>
+                  {message.description}
+                </Typography>
+
+                {_.get(message, "answers", []).length > 0 && (
                   <Typography noWrap>
-                    <b>Description: </b>
-                    {message.description}
+                    <b>Answers: </b>
+                    {_.get(message, "answers", []).length > 0
+                      ? message.answers.map((message) => <li>{message}</li>)
+                      : null}
                   </Typography>
+                )}
 
-                  {_.get(message, "answers", []).length > 0 && (
-                    <Typography noWrap>
-                      <b>Answers: </b>
-                      {_.get(message, "answers", []).length > 0
-                        ? message.answers.map((message) => <li>{message}</li>)
-                        : null}
-                    </Typography>
-                  )}
-
-                  {user.rol == "root" ? (
-                    <Box textAlign="center" marginTop={1}>
-                      <Button
-                        variant="contained"
-                        onClick={() => handleModal(message)}
-                      >
-                        Answer
-                      </Button>
-                    </Box>
-                  ) : null}
-                </AccordionDetails>
-              </Accordion>
-            ))
-          ) : (
-            <EmptyView />
-          )}
+                {user.rol == "root" ? (
+                  <Box textAlign="center" marginTop={1}>
+                    <Button
+                      variant="contained"
+                      onClick={() => handleModal(message)}
+                    >
+                      Answer
+                    </Button>
+                  </Box>
+                ) : null}
+              </AccordionDetails>
+            </Accordion>
+          ))}
         </div>
       </Container>
     </Container>
   );
 };
 
-export default Message;
+export default ManageUsers;
