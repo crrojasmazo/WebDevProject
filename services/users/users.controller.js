@@ -45,6 +45,14 @@ const deleteUsers = asyncMiddleware(async (req, res) => {
   }
 });
 
+const getUserInfo = asyncMiddleware(async (req, res) => {
+  const user_id = req.params.id;
+  if (user_id) {
+    user_found = await User.findOne({ _id: user_id });
+    res.status(200).send(user_found);
+  }
+});
+
 const login = asyncMiddleware(async (req, res) => {
   const { email, password } = req.body;
   const existing_user = await User.findOne({ email });
@@ -74,4 +82,5 @@ module.exports = {
   updateUsers,
   deleteUsers,
   login,
+  getUserInfo,
 };

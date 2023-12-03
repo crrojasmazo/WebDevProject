@@ -6,7 +6,7 @@ const signup = async (user) => await api.post(`${prefix}/register`, user);
 
 const signin = async (user) => await api.post(`${prefix}/login`, user);
 
-const getUserInfo = async () => await api.get(`${prefix}/info`);
+const getUserInfo = async (id) => await api.get(`${prefix}/info/${id}`);
 
 const authService = {
   signin,

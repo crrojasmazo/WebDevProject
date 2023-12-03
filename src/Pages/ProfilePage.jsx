@@ -16,6 +16,7 @@ import userService from "../ApiCalls/userService";
 
 import dogfire from "../Assets/Images/dogfire.jpg";
 import { UserContext } from "../Context/Context";
+import authService from "../ApiCalls/authService";
 
 const ProfilePage = () => {
   const { user, setUser } = useContext(UserContext);
@@ -48,6 +49,22 @@ const ProfilePage = () => {
     setEditing(!editing);
   };
 
+  const updateUserProfileInterface = () => {
+    const id = _.get(user, "_id", undefined);
+    if (id) {
+      const res = authService.getUserInfo(id);
+      res.then((val) => {
+        if (val.status == 200) {
+          const data = _.get(val, "data", {});
+          setUser({
+            ...user,
+            ...data,
+          });
+        }
+      });
+    }
+  };
+
   const handleSave = () => {
     const res = userService.updateUser({
       id: _.get(user, "_id"),
@@ -67,6 +84,7 @@ const ProfilePage = () => {
           });
           setEditing(!editing);
           setOpen(true);
+          updateUserProfileInterface();
         }
       })
       .catch(console.log);
