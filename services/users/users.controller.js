@@ -31,18 +31,18 @@ const addUsers = asyncMiddleware(async (req, res) => {
 
 const updateUsers = asyncMiddleware(async (req, res) => {
   if (req.body?.name === "") throw new Error("Name is required");
-  const updated_user = await User.findOneAndUpdate(
-    { _id: req.params.id },
-    req.body,
-    { new: true }
-  );
+  const updated_user = await User.updateOne({ _id: req.params.id }, req.body, {
+    new: true,
+  });
   res.status(200).send(updated_user);
 });
 
 const deleteUsers = asyncMiddleware(async (req, res) => {
   const user_id = req.params.id;
-  await User.findOneAndDelete(user_id);
-  res.status(204).end();
+  if (user_id) {
+    await User.deleteOne({ _id: user_id });
+    res.status(204).end();
+  }
 });
 
 const login = asyncMiddleware(async (req, res) => {

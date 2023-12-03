@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import {
   Modal,
   Avatar,
@@ -9,74 +9,93 @@ import {
   Box,
   Typography,
 } from "@mui/material";
-import { Settings, Logout, Comment } from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import { Settings, Logout, Comment, ManageAccounts } from "@mui/icons-material";
 
-const HeaderMenu = ({ open, handleClose, anchorEl, handleOpenModal }) => (
-  <Menu
-    anchorEl={anchorEl}
-    id="account-menu"
-    open={open}
-    onClose={handleClose}
-    onClick={handleClose}
-    PaperProps={{
-      elevation: 0,
-      sx: {
-        overflow: "visible",
-        filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-        mt: 1.5,
-        "& .MuiAvatar-root": {
-          width: 32,
-          height: 32,
-          ml: -0.5,
-          mr: 1,
+import { Link } from "react-router-dom";
+import { UserContext } from "../Context/Context";
+
+const HeaderMenu = ({ open, handleClose, anchorEl, handleOpenModal }) => {
+  const { user, setUser } = useContext(UserContext);
+
+  return (
+    <Menu
+      anchorEl={anchorEl}
+      id="account-menu"
+      open={open}
+      onClose={handleClose}
+      onClick={handleClose}
+      PaperProps={{
+        elevation: 0,
+        sx: {
+          overflow: "visible",
+          filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+          mt: 1.5,
+          "& .MuiAvatar-root": {
+            width: 32,
+            height: 32,
+            ml: -0.5,
+            mr: 1,
+          },
+          "&:before": {
+            content: '""',
+            display: "block",
+            position: "absolute",
+            top: 0,
+            right: 14,
+            width: 10,
+            height: 10,
+            bgcolor: "background.paper",
+            transform: "translateY(-50%) rotate(45deg)",
+            zIndex: 0,
+          },
         },
-        "&:before": {
-          content: '""',
-          display: "block",
-          position: "absolute",
-          top: 0,
-          right: 14,
-          width: 10,
-          height: 10,
-          bgcolor: "background.paper",
-          transform: "translateY(-50%) rotate(45deg)",
-          zIndex: 0,
-        },
-      },
-    }}
-    transformOrigin={{ horizontal: "right", vertical: "top" }}
-    anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
-  >
-    <Link to="/profile" style={{ color: "black", textDecoration: "none" }}>
-      <MenuItem>
-        <Avatar /> Profile
-      </MenuItem>
-    </Link>
-    <Divider />
-    <Link to="/pqr" style={{ color: "black", textDecoration: "none" }}>
-      <MenuItem>
+      }}
+      transformOrigin={{ horizontal: "right", vertical: "top" }}
+      anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+    >
+      <Link to="/profile" style={{ color: "black", textDecoration: "none" }}>
+        <MenuItem>
+          <Avatar /> Profile
+        </MenuItem>
+      </Link>
+      <Divider />
+      <Link to="/pqr" style={{ color: "black", textDecoration: "none" }}>
+        <MenuItem>
+          <ListItemIcon>
+            <Settings fontSize="small" />
+          </ListItemIcon>
+          FAQs
+        </MenuItem>
+      </Link>
+      <Link to="/message" style={{ color: "black", textDecoration: "none" }}>
+        <MenuItem>
+          <ListItemIcon>
+            <Comment fontSize="small" />
+          </ListItemIcon>
+          Messages
+        </MenuItem>
+      </Link>
+      {user.rol == "root" && (
+        <Link
+          to="/manageprofiles"
+          style={{ color: "black", textDecoration: "none" }}
+        >
+          <MenuItem>
+            <ListItemIcon>
+              <ManageAccounts fontSize="small" />
+            </ListItemIcon>
+            Manage Profiles
+          </MenuItem>
+        </Link>
+      )}
+      <MenuItem onClick={handleOpenModal}>
         <ListItemIcon>
-          <Settings fontSize="small" />
+          <Logout fontSize="small" />
         </ListItemIcon>
-        FAQs
+        Logout
       </MenuItem>
-    </Link>
-    <Link to="/message" style={{ color: "black", textDecoration: "none" }}>
-      <MenuItem>
-        <ListItemIcon>
-          <Comment fontSize="small" />
-        </ListItemIcon>
-        Messages
-      </MenuItem>
-    </Link>
-    <MenuItem onClick={handleOpenModal}>
-      <ListItemIcon>
-        <Logout fontSize="small" />
-      </ListItemIcon>
-      Logout
-    </MenuItem>
-  </Menu>
-);
+    </Menu>
+  );
+};
 
 export default HeaderMenu;

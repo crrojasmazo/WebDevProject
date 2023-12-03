@@ -49,6 +49,7 @@ const Header = () => {
 
   const logout = () => {
     setUser({});
+    window.location.reload(true);
   };
 
   const handleLeave = () => {

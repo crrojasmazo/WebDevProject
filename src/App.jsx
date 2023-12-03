@@ -10,6 +10,7 @@ import { UserContext } from "./Context/Context";
 import ProtectedRoute from "./Components/ProtectedRoute";
 import ProfilePage from "./Pages/ProfilePage";
 import Message from "./Pages/MessagePage";
+import ManageUsers from "./Pages/ManageUsersPage";
 
 const App = () => {
   const [user, setUser] = useState({
@@ -56,6 +57,14 @@ const App = () => {
             element={
               <ProtectedRoute user={user}>
                 <ProfilePage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/manageprofiles"
+            element={
+              <ProtectedRoute user={user}>
+                <ManageUsers />
               </ProtectedRoute>
             }
           />
